@@ -4,6 +4,6 @@ import parcelController from './controllers/parcelController'
 
 const router = express.Router()
 
-router.get('/', parcelController.getParcels)
+router.get('/parcels', parcelController.getParcels)
 
 export default router
