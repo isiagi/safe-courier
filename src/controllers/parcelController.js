@@ -12,6 +12,15 @@ const parcelController = {
             }
             Response(res, 200, result)
         })
+    },
+    getById: (req, res) =>{
+        parcelModal.findOne({_id: req.params.id},(err, result) => {
+            if(err){
+                Response(res, 400, err)
+            }
+            return Response(res, 200, result)
+        })
+    
     }
 }
 

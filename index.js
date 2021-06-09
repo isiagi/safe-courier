@@ -8,9 +8,12 @@ import './src/database/database'
 
 const app = express()
 
-app.use('/api/v1/', Router)
-app.use(methodError)
-app.use(serverError)
+app.use(express.json())
+
+app
+.use('/api/v1/', Router)
+.use(methodError)
+.use(serverError)
 
 const PORT = process.env.PORT || 5000
 
