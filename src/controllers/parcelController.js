@@ -20,8 +20,29 @@ const parcelController = {
             }
             return Response(res, 200, result)
         })
-    
-    }
+    },
+    createParcel:  (req, res) => {
+        parcelModal.create(req.body, (err, result) => {
+            if (err) {
+                return Response(res, 400, err)
+            }
+            return Response(res, 200, result)
+        })
+    },
+    cancelParcel: (req, res) => {
+        parcelModal.findOneAndUpdate(
+          { _id: req.params.id },
+          { $set: { status: "canceled" } },
+          { new: true },
+          (err, result) => {
+            if (err) {
+              Response(res, 400, err);
+            }
+            return Response(res, 200, result);
+          }
+        );
+      }
+  
 }
 
 export default parcelController
