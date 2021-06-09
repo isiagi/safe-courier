@@ -29,6 +29,14 @@ const parcelController = {
             return Response(res, 200, result)
         })
     },
+    updateParcel: (req, res) => {
+        parcelModal.updateOne({_id: req.params.id}, req.body, (err, result) => {
+            if(err){
+                Response(res, 400, err)
+            }
+            return Response(res, 200, "Parcel successful updated")
+        })
+    },
     cancelParcel: (req, res) => {
         parcelModal.findOneAndUpdate(
           { _id: req.params.id },
