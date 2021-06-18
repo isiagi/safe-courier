@@ -1,23 +1,248 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "version": "1.0.0", 
-      "title": "Safe Courier",
-      "description": "Safe Courier Application API",
-      "license": {
-        "name": "MIT",
-        "url": "https://opensource.org/licenses/MIT"
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Safe Courier",
+    "description": "Delievery system",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/api/v1/parcels": {
+      "get": {
+        "tags": ["parcels"],
+        "summary": "Get all parcels in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/parcel"
+            }
+          }
+        }
       }
     },
-    "host": "localhost:5000",
-    "basePath": "/",
-    "tags": [
-      {
-        "name": "Users",
-        "description": "API for users in the system"
+    "/api/v1/parcel": {
+      "post": {
+        "tags": ["parcels"],
+        "summary": "Adds parcel in system",
+        "parameters": [
+          {
+            "name": "parcel",
+            "in": "body",
+            "description": "Parcel that we want to create",
+            "schema": {
+              "$ref": "#/definitions/parcel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "New Parcel Created",
+            "schema": {
+              "$ref": "#/definitions/parcel"
+            }
+          }
+        }
       }
-    ],
-    "schemes": ["http"],
-    "consumes": ["application/json"],
-    "produces": ["application/json"]
+    },
+    "/api/v1/parcel/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of parcel that we want to find"
+        }
+      ],
+      "get": {
+        "tags": ["parcels"],
+        "summary": "Get parcel in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/parcels"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete parcel with given ID",
+        "tags": ["parcels"],
+        "responses": {
+          "200": {
+            "description": "parcel is deleted",
+            "schema": {
+              "$ref": "#/definitions/parcel"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update parcel with give ID",
+        "tags": ["parcels"],
+        "parameters": [
+          {
+            "name": "parcel",
+            "in": "body",
+            "description": "Parcel with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/updateParcel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Parcel is updated",
+            "schema": {
+              "$ref": "#/definitions/parcel"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/register": {
+     
+      "post": {
+        "summary": "Sign Up A New User",
+        "tags": ["Auth"],
+        "parameters": [
+          {
+            "name": "Registration",
+            "in": "body",
+            "description": "Registering of a new user",
+            "schema": {
+              "$ref": "#/definitions/vehicles"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "New vehicle created",
+            "schema": {
+              "$ref": "#/definitions/vehicles"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+     
+      "post": {
+        "summary": "Login into the application",
+        "tags": ["Auth"],
+        "parameters": [
+          {
+            "name": "Login",
+            "in": "body",
+            "description": "Registering of a new user",
+            "schema": {
+              "$ref": "#/definitions/auth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "New vehicle created",
+            "schema": {
+              "$ref": "#/definitions/auth"
+            }
+          }
+        }
+      }
+    }    
+  },
+  "definitions": {
+    "parcel": {
+      "required": [
+       "description",
+       "weight",
+       "userId",
+       "status",
+       "pick",
+       "destination"
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        } ,
+        "weight": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "pick": {
+          "type": "string"
+        },
+        "destination": {
+          "type": "string"
+        }
+      }
+    },
+    "updateParcel": {
+      "required": [],
+      "properties": {
+        "description": {
+          "type": "string"
+        } ,
+        "weight": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "pick": {
+          "type": "string"
+        },
+        "destination": {
+          "type": "string"
+        }
+      }
+    },
+
+    "auth": {
+      "required": [
+        "username",
+        "firstName",
+        "lastName",
+        "email",
+        "password"
+      ],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "packages": {
+
+      "type": "array",
+      "$ref": "#/definitions/parcel"
+    }
   }
+}
