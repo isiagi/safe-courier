@@ -1,11 +1,11 @@
 import express from 'express'
 import cors from 'cors'
+import './src/database/database'
 import Router from './src/router'
 import swaggerUi from 'swagger-ui-express'
 import swaggerDocument from './swagger.json'
 import {methodError, serverError} from './src/error/error.middle'
 
-import './src/database/database'
 
 const app = express()
 
