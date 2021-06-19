@@ -1,1 +1,1 @@
-web: node -r esm -r dotenv/config index.js
+web: node -r esm index.js

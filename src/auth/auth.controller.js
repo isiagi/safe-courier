@@ -6,7 +6,7 @@ import bcrypt from "bcrypt";
 
 import dot from "dotenv";
 
-dot.config();
+dot.config({ silent: process.env.NODE_ENV === 'production' });
 
 const userController = {
   register: async (req, res) => {
