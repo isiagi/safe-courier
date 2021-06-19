@@ -15,3 +15,7 @@ mongoose.connect(process.env.DB_CONNECT, options).then(() => {
 }).catch((error) => {
     console.log({'Db connection failed': error});
 });
+
+const db = mongoose.connection
+
+export default db
