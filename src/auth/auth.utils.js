@@ -4,7 +4,7 @@ import jwt, { verify } from "jsonwebtoken";
 import Response from "../utils/response";
 import dot from "dotenv";
 
-dot.config();
+dot.config({ silent: process.env.NODE_ENV === 'production' });
 
 export const authUtils = {
   findByEmail: async (email) => {
