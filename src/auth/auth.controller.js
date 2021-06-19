@@ -33,7 +33,9 @@ const userController = {
   }
   ,
   login: async (req, res) => {
-    const user = await authUtils.findByEmail(req.body.email);
+
+    try {
+      const user = await authUtils.findByEmail(req.body.email);
 
     if (!user) {
       return Response(res, 400, "Sign Up to continue");
@@ -58,6 +60,11 @@ const userController = {
     console.log(token);
 
     return Response(res, 200, { user, token });
+      
+    } catch (error) {
+      console.log('error');
+    }
+    
   },
 };
 
