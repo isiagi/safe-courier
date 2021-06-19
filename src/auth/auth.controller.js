@@ -62,7 +62,7 @@ const userController = {
     return Response(res, 200, { user, token });
       
     } catch (error) {
-      console.log('error');
+      console.log(error);
     }
     
   },
