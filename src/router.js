@@ -10,7 +10,7 @@ router.post('/auth/register', authController.register)
 router.post('/auth/login', authController.login)
 
 router.get("/parcels", getAll, verifyToken ,scopeParcel, getByUser, parcelController.getParcels);
-router.get("/parcels/:id", getByUser ,getById, verifyToken, authGet, parcelController.getById);
+router.get("/parcels/:id",getById, verifyToken, authGet, parcelController.getById);
 router.post("/parcels", verifyToken, parcelController.createParcel);
 router.patch('/parcels/:id/edit',parcelController.updateParcel)
 router.patch("/parcels/:id/cancel", parcelController.cancelParcel);
