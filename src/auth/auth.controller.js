@@ -22,6 +22,7 @@ const userController = {
       lastName: req.body.lastName, 
       email: req.body.email, 
       password: hashPassword, 
+      userType: req.body.userType
     });
     
     try {

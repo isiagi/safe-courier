@@ -8,7 +8,7 @@ export const authRole = (...roles) => {
   };
   
   export const authRol = (user, data) => {
-    return user.userRole.userType === 'user' || data.userId === user._id
+    return user.userRole.userType === 'admin' || data.userId === user._id
   };
   
   export function authScope(user){
