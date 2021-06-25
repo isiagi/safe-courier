@@ -34,7 +34,7 @@ const parcelController = {
           { new: true },
           (err, result) => {
             if (err) {
-              Response(res, 400, err);
+              return Response(res, 400, err);
             }
             return Response(res, 200, result);
           }
