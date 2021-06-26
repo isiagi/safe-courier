@@ -1,5 +1,6 @@
 import parcelModal from '../models/parcel.model'
 import Response from '../utils/response'
+import {EmailTransporter} from '../middleware/nodemailer'
 
 const parcelController = {
 
@@ -20,9 +21,12 @@ const parcelController = {
         })
     },
     updateParcel: (req, res) => {
-        parcelModal.updateOne({_id: req.params.id}, req.body, (err, result) => {
+        parcelModal.updateOne({_id: req.params.id}, req.body, async(err, result) => {
             if(err){
                 Response(res, 400, err)
+            }
+            if(req.user.userRole.userType === 'admin'){
+               await EmailTransporter(req.user.userRole.email)
             }
             return Response(res, 200, "Parcel successful updated")
         })
@@ -34,7 +38,7 @@ const parcelController = {
           { new: true },
           (err, result) => {
             if (err) {
-              return Response(res, 400, err);
+              Response(res, 400, err);
             }
             return Response(res, 200, result);
           }
