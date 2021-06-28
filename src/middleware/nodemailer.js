@@ -13,6 +13,10 @@ export const EmailTransporter = async(email) => {
         user: process.env.USERS,
         pass: process.env.PASS,
       },
+      tls: {
+        // do not fail on invalid certs
+        rejectUnauthorized: false
+    }
     })
   );
 
