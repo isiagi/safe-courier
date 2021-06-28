@@ -2,7 +2,7 @@ import express from "express";
 import parcelController from "./controllers/parcelController";
 import authController from "./auth/auth.controller"
 import { verifyToken } from "./auth/auth.utils"
-import {getById, authGet, getAll, scopeParcel, getByUser} from "./middleware/parcel.middleware"
+import {getById, authGet, getAll, scopeParcel, getByUser,scopeAuth} from "./middleware/parcel.middleware"
 
 const router = express.Router();
 
@@ -13,6 +13,7 @@ router.get("/parcels", getAll, verifyToken ,scopeParcel, getByUser, parcelContro
 router.get("/parcels/:id",getById, verifyToken, authGet, parcelController.getById);
 router.post("/parcels", verifyToken, parcelController.createParcel);
 router.patch('/parcels/:id/edit', verifyToken, parcelController.updateParcel)
+router.patch('/parcels/:id/edit/admin', verifyToken, scopeAuth, parcelController.updateParcel)
 router.patch("/parcels/:id/cancel", parcelController.cancelParcel);
 
 // todo
