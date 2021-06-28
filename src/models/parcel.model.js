@@ -1,6 +1,7 @@
 import mongoose, {Schema} from 'mongoose'
 
 const parcelSchema = new Schema({
+    title: String,
     description: String,
     weight: String,
     userId: String,
