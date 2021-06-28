@@ -10,7 +10,8 @@ const parcelSchema = new Schema({
         enum: ['delievered', 'canceled', 'delievering']
     },
     pick: String,
-    destination: String
+    destination: String,
+    email: String,
 })
 
 const Parcel = mongoose.model('parcel', parcelSchema)
