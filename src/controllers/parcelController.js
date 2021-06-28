@@ -13,6 +13,7 @@ const parcelController = {
     },
     createParcel:  (req, res) => {
         req.body.userId = req.user.user
+        req.body.email = req.user.userRole.email
         parcelModal.create(req.body, (err, result) => {
             if (err) {
                 return Response(res, 400, err)
@@ -25,8 +26,11 @@ const parcelController = {
             if(err){
                 Response(res, 400, err)
             }
+
+            const email = await parcelModal.findById(req.params.id)
+
             if(req.user.userRole.userType === 'admin'){
-               await EmailTransporter(req.user.userRole.email)
+               await EmailTransporter(email.email)
             }
             return Response(res, 200, "Parcel successful updated")
         })
