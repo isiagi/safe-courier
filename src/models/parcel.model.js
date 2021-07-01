@@ -7,7 +7,8 @@ const parcelSchema = new Schema({
     userId: String,
     status:{
         type: String,
-        enum: ['delievered', 'canceled', 'delievering']
+        enum: ['pending','delievered', 'canceled', 'delievering'],
+        default: 'pending'
     },
     pick: String,
     destination: String,
